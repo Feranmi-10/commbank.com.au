@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CommBank — Banking, Home loans, Insurance &amp; Investing</title>
+<meta name="description" content="Front-end clone of the CommBank homepage built with semantic HTML, CSS custom properties and vanilla JavaScript. Educational project — not affiliated with or endorsed by the Commonwealth Bank of Australia.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='6' y='6' width='20' height='20' rx='3' fill='%23FFCD00' stroke='%23000' stroke-width='2' transform='rotate(45 16 16)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============================================================
+     ICON SPRITE — plain inline SVG, no external requests
+     ============================================================ -->
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <symbol id="i-diamond" viewBox="0 0 24 24">
+      <path d="M12 2.6 21.4 12 12 21.4 2.6 12z" fill="currentColor" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-search" viewBox="0 0 24 24">
+      <circle cx="10.5" cy="10.5" r="6.6" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M15.4 15.4 21 21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24">
+      <rect x="4.5" y="10.5" width="15" height="10.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 24 24">
+      <path d="M5 5l14 14M19 5 5 19" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24">
+      <path d="M9 4.5 16.5 12 9 19.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-up" viewBox="0 0 24 24">
+      <path d="M4.5 15.5 12 8l7.5 7.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24">
+      <path d="M3.5 7h17M3.5 12h17M3.5 17h17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-menu-x" viewBox="0 0 24 24">
+      <path d="M5 6.5h14M5 12h14M5 17.5h9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+      <path d="M15.5 14.5 21 20M21 14.5 15.5 20" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+    </symbol>
+    <!-- mega-menu pictograms -->
+    <symbol id="i-wallet" viewBox="0 0 48 48">
+      <rect x="6" y="14" width="36" height="24" rx="4" fill="#fff" stroke="#000" stroke-width="2"/>
+      <path d="M28 22h14v8H28z" fill="#FFCD00" stroke="#000" stroke-width="2"/>
+      <path d="M6 20h36" stroke="#000" stroke-width="2"/>
+    </symbol>
+    <symbol id="i-house" viewBox="0 0 48 48">
+      <path d="M8 22 24 8l16 14v18H8z" fill="#fff" stroke="#000" stroke-width="2" stroke-linejoin="round"/>
+      <rect x="20" y="24" width="8" height="8" fill="#FFCD00" stroke="#000" stroke-width="2"/>
+    </symbol>
+    <symbol id="i-umbrella" viewBox="0 0 48 48">
+      <path d="M4 26a20 20 0 0 1 40 0z" fill="#FFCD00" stroke="#000" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M24 26v12a5 5 0 0 0 10 0" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+      <path d="M4 26a20 20 0 0 1 40 0" fill="none" stroke="#000" stroke-width="0"/>
+    </symbol>
+    <symbol id="i-suitcase" viewBox="0 0 48 48">
+      <path d="M18 14v-4a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v4" fill="none" stroke="#000" stroke-width="2"/>
+      <rect x="10" y="14" width="28" height="26" rx="4" fill="#fff" stroke="#000" stroke-width="2"/>
+      <rect x="20" y="30" width="8" height="10" fill="#FFCD00" stroke="#000" stroke-width="2"/>
+    </symbol>
+    <symbol id="i-card-chart" viewBox="0 0 48 48">
+      <rect x="6" y="12" width="36" height="26" rx="3" fill="#fff" stroke="#000" stroke-width="2"/>
+      <path d="M6 20h36" stroke="#000" stroke-width="2"/>
+      <rect x="26" y="26" width="10" height="8" fill="#FFCD00" stroke="#000" stroke-width="2"/>
+    </symbol>
+    <symbol id="i-calculator" viewBox="0 0 48 48">
+      <rect x="9" y="7" width="14" height="15" rx="2" fill="#fff" stroke="#000" stroke-width="2"/>
+      <rect x="25" y="7" width="14" height="15" rx="2" fill="#fff" stroke="#000" stroke-width="2"/>
+      <rect x="9" y="24" width="14" height="15" rx="2" fill="#fff" stroke="#000" stroke-width="2"/>
+      <rect x="25" y="24" width="14" height="15" rx="2" fill="#FFCD00" stroke="#000" stroke-width="2"/>
+      <path d="M13 14.5h6M29 14.5h6M13 31.5h6" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-chat" viewBox="0 0 48 48">
+      <path d="M7 10h34v22H25l-9 8v-8H7z" fill="#fff" stroke="#000" stroke-width="2" stroke-linejoin="round"/>
+      <rect x="30" y="16" width="7" height="7" fill="#FFCD00" stroke="#000" stroke-width="2"/>
+    </symbol>
+    <symbol id="i-phone" viewBox="0 0 48 48">
+      <rect x="15" y="5" width="18" height="38" rx="4" fill="#fff" stroke="#000" stroke-width="2"/>
+      <path d="M21 9h6" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+      <rect x="19" y="34" width="10" height="4" fill="#FFCD00" stroke="#000" stroke-width="2"/>
+    </symbol>
+    <symbol id="i-map" viewBox="0 0 48 48">
+      <path d="M6 12h36v26H6z" fill="#fff" stroke="#000" stroke-width="2"/>
+      <path d="M18 12v26M30 12v26" stroke="#000" stroke-width="2"/>
+      <path d="M9 20l6-6" stroke="#FFCD00" stroke-width="4" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- ============================================================
+     STEP 2 — HEADER: logo, nav, search, log on
+     ============================================================ -->
+<header class="site-header" data-header>
+  <div class="topbar"></div>
+
+  <div class="header__inner">
+    <a class="brand" href="#" aria-label="CommBank home">
+      <span class="brand__mark" aria-hidden="true"></span>
+    </a>
+
+    <button class="icon-btn icon-btn--menu" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-nav">
+      <svg class="ico" aria-hidden="true"><use href="#i-menu"/></svg>
+      <span class="visually-hidden">Menu</span>
+    </button>
+
+    <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+      <ul class="primary-nav__list">
+        <li class="has-mega">
+          <button class="nav-link nav-link--btn" type="button" data-mega="mega-banking" aria-expanded="false">Banking</button>
+        </li>
+        <li class="has-mega">
+          <button class="nav-link nav-link--btn" type="button" data-mega="mega-home" aria-expanded="false">Home loans</button>
+        </li>
+        <li class="has-mega">
+          <button class="nav-link nav-link--btn" type="button" data-mega="mega-insurance" aria-expanded="false">Insurance</button>
+        </li>
+        <li>
+          <a class="nav-link" href="#investing">Investing &amp; Super</a>
+        </li>
+        <li class="has-mega">
+          <button class="nav-link nav-link--btn" type="button" data-mega="mega-business" aria-expanded="false">Business</button>
+        </li>
+        <li>
+          <a class="nav-link" href="#institutional">Institutional</a>
+        </li>
+        <li>
+          <a class="nav-link" href="#yello">CommBank Yello</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      <button class="icon-btn" type="button" data-search-toggle aria-expanded="false" aria-controls="search-panel">
+        <svg class="ico" aria-hidden="true"><use href="#i-search"/></svg>
+        <span class="visually-hidden">Search commbank.com.au</span>
+      </button>
+
+      <button class="btn-logon" type="button" data-drawer="logon-drawer" aria-expanded="false" aria-controls="logon-drawer">
+        <svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg>
+        <span>Log on</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ---- mega menu panels ---- -->
+  <div class="mega" id="mega-banking" data-mega-panel hidden>
+    <div class="mega__inner mega__grid">
+      <section class="mega-col">
+        <h2 class="mega-col__title">
+          <a href="#banking"><svg class="ico ico--pict" aria-hidden="true"><use href="#i-wallet"/></svg><span>Banking</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a>
+        </h2>
+        <ul class="mega-col__list">
+          <li><a href="#bank-accounts">Bank &amp; savings accounts</a></li>
+          <li><a href="#credit-cards">Credit cards</a></li>
+          <li><a href="#personal-loans">Personal loans &amp; car loans</a></li>
+        </ul>
+      </section>
+
+      <section class="mega-col">
+        <h2 class="mega-col__title">
+          <a href="#home-loans"><svg class="ico ico--pict" aria-hidden="true"><use href="#i-house"/></svg><span>Home loans</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a>
+        </h2>
+        <ul class="mega-col__list">
+          <li><a href="#repayments-calculator">Repayments calculator</a></li>
+          <li><a href="#interest-rates">Interest rates</a></li>
+          <li><a href="#refinancing">Refinancing</a></li>
+        </ul>
+      </section>
+
+      <section class="mega-col">
+        <h2 class="mega-col__title">
+          <a href="#insurance"><svg class="ico ico--pict" aria-hidden="true"><use href="#i-umbrella"/></svg><span>Insurance &amp; more</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a>
+        </h2>
+        <ul class="mega-col__list">
+          <li><a href="#insurance">Insurance</a></li>
+          <li><a href="#investing">Investing</a></li>
+          <li><a href="#super">Superannuation</a></li>
+        </ul>
+      </section>
+
+      <section class="mega-col">
+        <h2 class="mega-col__title">
+          <a href="#international"><svg class="ico ico--pict" aria-hidden="true"><use href="#i-suitcase"/></svg><span>International</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a>
+        </h2>
+        <ul class="mega-col__list">
+          <li><a href="#travel">Travel products &amp; services</a></li>
+          <li><a href="#overseas-payment">Overseas payment</a></li>
+          <li><a href="#fx-calculator">Foreign exchange calculator</a></li>
+        </ul>
+      </section>
+
+      <section class="mega-col">
+        <h2 class="mega-col__title">
+          <a href="#business"><svg class="ico ico--pict" aria-hidden="true"><use href="#i-card-chart"/></svg><span>Business</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a>
+        </h2>
+        <ul class="mega-col__list">
+          <li><a href="#business-accounts">Bank accounts &amp; cards</a></li>
+          <li><a href="#eftpos">EFTPOS &amp; eCommerce</a></li>
+          <li><a href="#business-loans">Business loans &amp; finance</a></li>
+        </ul>
+      </section>
+
+      <section class="mega-col">
+        <h2 class="mega-col__title">
+          <a href="#rates"><svg class="ico ico--pict" aria-hidden="true"><use href="#i-calculator"/></svg><span>Rates &amp; calculators</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a>
+        </h2>
+        <ul class="mega-col__list">
+          <li><a href="#rates-fees">Rates &amp; fees</a></li>
+          <li><a href="#tools">Tools &amp; calculators</a></li>
+          <li><a href="#product-selector">Business product selector</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="mega" id="mega-home" data-mega-panel hidden>
+    <div class="mega__inner mega__grid mega__grid--3">
+      <section class="mega-col">
+        <h2 class="mega-col__title"><a href="#home-loans"><svg class="ico ico--pict" aria-hidden="true"><use href="#i-house"/></svg><span>Home loans</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></h2>
+        <ul class="mega-col__list">
+          <li><a href="#buying">Buy your home</a></li>
+          <li><a href="#refinancing">Refinancing</a></li>
+          <li><a href="https://commbank.net" rel="noopener">Construction loans</a></li>
+          <li><a href="#equity">Access your equity</a></li>
+        </ul>
+      </section>
+      <section class="mega-col">
+        <h2 class="mega-col__title"><a href="#repayments-calculator"><svg class="ico ico--pict" aria-hidden="true"><use href="#i-calculator"/></svg><span>Tools &amp; calculators</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></h2>
+        <ul class="mega-col__list">
+          <li><a href="#repayments-calculator">Repayments calculator</a></li>
+          <li><a href="#borrowing">Borrowing power</a></li>
+          <li><a href="#stamp-duty">Stamp duty calculator</a></li>
+          <li><a href="#interest-rates">Interest rates</a></li>
+        </ul>
+      </section>
+      <section class="mega-col">
+        <h2 class="mega-col__title"><a href="#insurance-home"><svg class="ico ico--pict" aria-hidden="true"><use href="#i-umbrella"/></svg><span>Protect your home</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></h2>
+        <ul class="mega-col__list">
+          <li><a href="#home-insurance">Home insurance</a></li>
+          <li><a href="#contents">Contents insurance</a></li>
+          <li><a href="#mortgage-insurance">Mortgage protection insurance</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="mega" id="mega-insurance" data-mega-panel hidden>
+    <div class="mega__inner mega__grid mega__grid--3">
+      <section class="mega-col">
+        <h2 class="mega-col__title"><a href="#insurance"><svg class="ico ico--pict" aria-hidden="true"><use href="#i-umbrella"/></svg><span>Insurance</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></h2>
+        <ul class="mega-col__list">
+          <li><a href="#life">Life insurance</a></li>
+          <li><a href="#income">Income protection</a></li>
+          <li><a href="#health">Health insurance</a></li>
+        </ul>
+      </section>
+      <section class="mega-col">
+        <h2 class="mega-col__title"><a href="#investing"><svg class="ico ico--pict" aria-hidden="true"><use href="#i-card-chart"/></svg><span>Investing</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></h2>
+        <ul class="mega-col__list">
+          <li><a href="#managed-funds">Managed funds</a></li>
+          <li><a href="#term-deposit">Term deposits</a></li>
+          <li><a href="#shares">Shares &amp; brokerage</a></li>
+        </ul>
+      </section>
+      <section class="mega-col">
+        <h2 class="mega-col__title"><a href="#super"><svg class="ico ico--pict" aria-hidden="true"><use href="#i-suitcase"/></svg><span>Superannuation</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></h2>
+        <ul class="mega-col__list">
+          <li><a href="#super-compare">Compare super</a></li>
+          <li><a href="#consolidate">Consolidate your super</a></li>
+          <li><a href="#first-home">Super &amp; your first home</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="mega" id="mega-business" data-mega-panel hidden>
+    <div class="mega__inner mega__grid mega__grid--3">
+      <section class="mega-col">
+        <h2 class="mega-col__title"><a href="#business"><svg class="ico ico--pict" aria-hidden="true"><use href="#i-card-chart"/></svg><span>Business banking</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></h2>
+        <ul class="mega-col__list">
+          <li><a href="#business-accounts">Bank accounts &amp; cards</a></li>
+          <li><a href="#business-loans">Business loans &amp; finance</a></li>
+          <li><a href="#eftpos">EFTPOS &amp; eCommerce</a></li>
+        </ul>
+      </section>
+      <section class="mega-col">
+        <h2 class="mega-col__title"><a href="#business-insurance"><svg class="ico ico--pict" aria-hidden="true"><use href="#i-umbrella"/></svg><span>Business insurance</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></h2>
+        <ul class="mega-col__list">
+          <li><a href="#liability">Public &amp; products liability</a></li>
+          <li><a href="#commercial">Commercial vehicle insurance</a></li>
+          <li><a href="#cyber">Cyber insurance</a></li>
+        </ul>
+      </section>
+      <section class="mega-col">
+        <h2 class="mega-col__title"><a href="#commbiz"><svg class="ico ico--pict" aria-hidden="true"><use href="#i-chat"/></svg><span>CommBiz</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></h2>
+        <ul class="mega-col__list">
+          <li><a href="#commbiz-payments">Payments &amp; payroll</a></li>
+          <li><a href="#commbiz-access">Request access to CommBiz</a></li>
+          <li><a href="#commbiz-support">Business support</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <!-- ---- search panel ---- -->
+  <div class="search" id="search-panel" data-search hidden>
+    <div class="search__inner">
+      <form class="search__form" role="search" action="#search-panel" data-search-form>
+        <label class="visually-hidden" for="q">Search commbank.com.au</label>
+        <input id="q" name="q" type="search" placeholder="Search for accounts, rates, help…" autocomplete="off">
+        <button class="btn btn--yellow btn--pill" type="submit">Search</button>
+      </form>
+      <p class="search__hint" data-search-hint>Popular searches</p>
+      <ul class="chips" data-search-chips>
+        <li><button type="button" class="chip">NetBank log on</button></li>
+        <li><button type="button" class="chip">Interest rates</button></li>
+        <li><button type="button" class="chip">Find a branch</button></li>
+        <li><button type="button" class="chip">Dispute a transaction</button></li>
+        <li><button type="button" class="chip">Foreign exchange</button></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     STEP 3 — COOKIE NOTICE (yellow rule + pill button)
+     ============================================================ -->
+<div class="scroll-spacer" aria-hidden="true"></div>
+
+<section class="cookies" id="cookies" aria-labelledby="cookies-title">
+  <div class="container">
+    <div class="cookies__box">
+      <h1 class="cookies__title" id="cookies-title">CommBank's use of cookies</h1>
+      <p class="cookies__body">CommBank uses different types of cookies depending on where you go on our site and what you're trying to do.</p>
+      <div class="cookies__actions">
+        <button class="btn btn--yellow btn--pill" type="button" data-scroll="#hero">Tell me more</button>
+        <button class="btn btn--ghost" type="button" data-cookie-dismiss="ok">Yes, I agree</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main id="main">
+  <!-- ============================================================
+       STEP 4b — the nav dropdown links, also standing on the page as
+       a section straight after the first section (reference: 6-up grid)
+       ============================================================ -->
+  <section class="cats" id="categories" aria-labelledby="cats-title">
+    <div class="container">
+      <h2 class="visually-hidden" id="cats-title">Browse by product</h2>
+      <div class="cats__grid">
+        <section class="mega-col">
+          <h3 class="mega-col__title"><a href="#banking"><svg class="ico ico--pict" aria-hidden="true"><use href="#i-wallet"/></svg><span>Banking</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></h3>
+          <ul class="mega-col__list">
+            <li><a href="#bank-accounts">Bank &amp; savings accounts</a></li>
+            <li><a href="#credit-cards">Credit cards</a></li>
+            <li><a href="#personal-loans">Personal loans &amp; car loans</a></li>
+          </ul>
+        </section>
+        <section class="mega-col">
+          <h3 class="mega-col__title"><a href="#home-loans"><svg class="ico ico--pict" aria-hidden="true"><use href="#i-house"/></svg><span>Home loans</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></h3>
+          <ul class="mega-col__list">
+            <li><a href="#repayments-calculator">Repayments calculator</a></li>
+            <li><a href="#interest-rates">Interest rates</a></li>
+            <li><a href="#refinancing">Refinancing</a></li>
+          </ul>
+        </section>
+        <section class="mega-col">
+          <h3 class="mega-col__title"><a href="#insurance"><svg class="ico ico--pict" aria-hidden="true"><use href="#i-umbrella"/></svg><span>Insurance &amp; more</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></h3>
+          <ul class="mega-col__list">
+            <li><a href="#insurance">Insurance</a></li>
+            <li><a href="#investing">Investing</a></li>
+            <li><a href="#super">Superannuation</a></li>
+          </ul>
+        </section>
+        <section class="mega-col">
+          <h3 class="mega-col__title"><a href="#international"><svg class="ico ico--pict" aria-hidden="true"><use href="#i-suitcase"/></svg><span>International</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></h3>
+          <ul class="mega-col__list">
+            <li><a href="#travel">Travel products &amp; services</a></li>
+            <li><a href="#overseas-payment">Overseas payment</a></li>
+            <li><a href="#fx-calculator">Foreign exchange calculator</a></li>
+          </ul>
+        </section>
+        <section class="mega-col">
+          <h3 class="mega-col__title"><a href="#business"><svg class="ico ico--pict" aria-hidden="true"><use href="#i-card-chart"/></svg><span>Business</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></h3>
+          <ul class="mega-col__list">
+            <li><a href="#business-accounts">Bank accounts &amp; cards</a></li>
+            <li><a href="#eftpos">EFTPOS &amp; eCommerce</a></li>
+            <li><a href="#business-loans">Business loans &amp; finance</a></li>
+          </ul>
+        </section>
+        <section class="mega-col">
+          <h3 class="mega-col__title"><a href="#rates"><svg class="ico ico--pict" aria-hidden="true"><use href="#i-calculator"/></svg><span>Rates &amp; calculators</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></h3>
+          <ul class="mega-col__list">
+            <li><a href="#rates-fees">Rates &amp; fees</a></li>
+            <li><a href="#tools">Tools &amp; calculators</a></li>
+            <li><a href="#product-selector">Business product selector</a></li>
+          </ul>
+        </section>
+      </div>
+      <hr class="cats__rule">
+    </div>
+  </section>
+
+  <!-- ============================================================
+       STEP 4 — HERO: "Making smart banking, smarter"
+       ============================================================ -->
+  <section class="hero" id="hero">
+    <div class="hero__inner">
+      <figure class="hero__media">
+        <img src="assets/img/hero-insights.jpg" width="1200" height="655" alt="A woman lying on a rug checking her savings goal on a yellow phone, with a glowing spending chart floating beside her">
+      </figure>
+      <div class="hero__copy">
+        <h2 class="hero__title">Making smart banking, smarter</h2>
+        <p class="hero__lede">Upgrade your money IQ with real-time intelligence that helps you understand your spending habits and hit your saving goals.</p>
+        <a class="btn btn--outline" href="#insights">Learn more about Insights</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       STEP 5 — CARD ROW: four stories
+       ============================================================ -->
+  <section class="cards" aria-labelledby="cards-title">
+    <h2 class="visually-hidden" id="cards-title">Stories and updates</h2>
+    <div class="container">
+      <div class="cards__grid">
+        <article class="card">
+          <img class="card__img" src="assets/img/card-next-chapter.jpg" width="680" height="371" loading="lazy" alt="A woman in a grey blouse standing in front of a pink curtain">
+          <h3 class="card__title">CommBank Next Chapter</h3>
+          <p class="card__text">We're dedicated to supporting victim–survivors who experience financial abuse, even if you don't bank with us.</p>
+          <a class="text-link" href="#next-chapter">Learn more</a>
+        </article>
+
+        <article class="card">
+          <img class="card__img" src="assets/img/card-share-market.jpg" width="680" height="371" loading="lazy" alt="Illustration of four professionals in suits on a yellow and white checkerboard floor">
+          <h3 class="card__title">The share market explained</h3>
+          <p class="card__text">We ask CommSec share market experts to explain four core investing pillars and why they warrant understanding.</p>
+          <a class="text-link" href="#share-market">Learn more</a>
+        </article>
+
+        <article class="card">
+          <img class="card__img" src="assets/img/card-modern-home.jpg" width="680" height="371" loading="lazy" alt="A modern single-storey home with pale timber cladding and a pitched metal roof">
+          <h3 class="card__title">James Hardie's top exterior design tips for Aussie homes</h3>
+          <p class="card__text"><span class="sponsored">[Sponsored]</span> New research from the James Hardie Modern Homes Forecast 2026 reveals what matters most to Australians when building their homes.</p>
+          <a class="text-link" href="#modern-homes">Learn more</a>
+        </article>
+
+        <article class="card">
+          <img class="card__img" src="assets/img/card-scam-alert.jpg" width="680" height="380" loading="lazy" alt="Yellow and coral chevron warning graphic">
+          <h3 class="card__title">CommBank Scam Alert</h3>
+          <p class="card__text">Scammers are impersonating CommBank in texts, emails and calls. Learn the warning signs to help stay safe.</p>
+          <a class="text-link" href="#scam-alert">Latest alerts</a>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============================================================
+     STEP 6 — DARK FOOTER: Support & FAQs / Contact / Locate / legal
+     ============================================================ -->
+<footer class="site-foot">
+  <div class="dark-footer">
+  <div class="container">
+    <div class="dark-footer__cols">
+      <section class="faqs">
+        <h2 class="block-title block-title--light">
+          <a href="#support">
+            <svg class="ico ico--pict" aria-hidden="true"><use href="#i-diamond"/></svg>
+            <span>Support &amp; FAQs</span>
+            <svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg>
+          </a>
+        </h2>
+        <div class="faq-cols">
+        <ul class="faq-list">
+          <li><a href="#emergency"><span>Emergency assistance</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+          <li><a href="#pending"><span>Cancel a pending transaction</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+          <li><a href="#phishing"><span>What's a phishing scam?</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+          <li><a href="#service-updates"><span>Service updates &amp; availability</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+        </ul>
+        <ul class="faq-list">
+          <li><a href="#cost-of-living"><span>Cost of living support</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+          <li><a href="#dispute"><span>Dispute a transaction</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+          <li><a href="#activate-card"><span>How do I activate a card?</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+          <li><a href="#complaints"><span>Complaints and compliments</span><svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+        </ul>
+        </div>
+      </section>
+
+      <div class="dark-footer__side">
+        <section class="side-block">
+          <h2 class="block-title block-title--light">
+            <a href="#contact">
+              <svg class="ico ico--pict" aria-hidden="true"><use href="#i-chat"/></svg>
+              <span>Contact us</span>
+              <svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg>
+            </a>
+          </h2>
+          <p class="side-block__text">Message us, ask our virtual assistant or call to connect to the right help.</p>
+        </section>
+
+        <section class="side-block">
+          <h2 class="block-title block-title--light">
+            <a href="#locate">
+              <svg class="ico ico--pict" aria-hidden="true"><use href="#i-map"/></svg>
+              <span>Locate us</span>
+              <svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg>
+            </a>
+          </h2>
+          <p class="side-block__text">Find a branch, ATM or specialist near you.</p>
+        </section>
+      </div>
+    </div>
+
+    <hr class="rule">
+
+    <section class="disclaimer">
+      <h2 class="disclaimer__title">Things you should know</h2>
+      <div class="disclaimer__body">
+        <p>As this advice has been prepared without considering your objectives, financial situation or needs, you should, before acting on the advice, consider its appropriateness to your circumstances. Visit <a href="#pid">Important Information</a> to access Product Disclosure Statements or Terms and Conditions which are currently available electronically for products of the Commonwealth Bank Group, along with the relevant Financial Services Guide. The target market for products issued by Commonwealth Bank can be found within the corresponding product's <a href="#tmd">Target Market Determination (TMD)</a>, available on our website. TMDs for products not issued by the Commonwealth Bank can be found on the website of the product issuer. Loan applications are subject to credit approval. Interest rates are subject to change without notice and may vary over the life of a loan.</p>
+        <p class="disclaimer__note"><strong>Authorised by</strong> Commonwealth Bank of Australia, <abbr title="Australia Square">AUS</abbr> Square, Sydney NSW 2000. This is a front-end study clone built for learning purposes only — it is not affiliated with, endorsed by, or connected to the Commonwealth Bank of Australia, and it must not be used to collect any real credentials or personal information.</p>
+      </div>
+    </section>
+  </div>
+    <div class="dark-footer__tail" aria-hidden="true"></div>
+  </div>
+
+<!-- ============================================================
+     STEP 7 — LIGHT FOOTER: quick links + acknowledgement
+     ============================================================ -->
+  <div class="light-footer">
+  <button class="to-top" type="button" data-to-top aria-label="Back to top">
+    <svg class="ico" aria-hidden="true"><use href="#i-up"/></svg>
+  </button>
+
+  <div class="container">
+    <div class="light-footer__cols">
+      <nav class="link-col" aria-labelledby="col-quick">
+        <h2 class="link-col__title" id="col-quick">Quick links</h2>
+        <ul>
+          <li><a href="#security">Security &amp; scams</a></li>
+          <li><a href="#help">Help &amp; support</a></li>
+          <li><a href="#assistance">Financial assistance</a></li>
+          <li><a href="#complaints-2">Complaints &amp; compliments</a></li>
+          <li><a href="#accessibility">Accessibility</a></li>
+        </ul>
+      </nav>
+      <nav class="link-col" aria-labelledby="col-about">
+        <h2 class="link-col__title" id="col-about">About us</h2>
+        <ul>
+          <li><a href="#about">About CommBank</a></li>
+          <li><a href="#careers">Careers at CommBank</a></li>
+          <li><a href="#sustainability">Sustainability</a></li>
+          <li><a href="#newsroom">Newsroom</a></li>
+          <li><a href="#investor">Investor centre</a></li>
+        </ul>
+      </nav>
+      <nav class="link-col" aria-labelledby="col-important">
+        <h2 class="link-col__title" id="col-important">Important information</h2>
+        <ul>
+          <li><a href="#documents">Important documents</a></li>
+          <li><a href="#code">Banking Code of Practice</a></li>
+          <li><a href="#cookies">Cookies policy</a></li>
+          <li><a href="#privacy">Privacy statement</a></li>
+          <li><a href="#slavery">Modern Slavery Statement</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <hr class="rule rule--light">
+
+    <p class="ack">CommBank acknowledges the <a href="#country">Traditional Owners</a> of the lands across Australia as the continuing custodians of Country and Culture. We pay our respect to First Nations peoples and their Elders, past and present.</p>
+    <p class="copyright">©2026 Commonwealth Bank of Australia ABN 48 123 123 124 AFSL and Australian credit licence 234945</p>
+  </div>
+</div>
+</footer>
+
+<!-- ============================================================
+     STEP 8 — LOG ON DRAWER (slides in from the right)
+     ============================================================ -->
+<div class="backdrop" data-backdrop hidden></div>
+
+<div class="drawer" id="logon-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" hidden>
+  <div class="drawer__head">
+    <button class="icon-btn icon-btn--onwhite" type="button" data-drawer-close aria-label="Close log on menu">
+      <svg class="ico" aria-hidden="true"><use href="#i-close"/></svg>
+    </button>
+    <h2 class="drawer__title" id="drawer-title">Log on</h2>
+  </div>
+
+  <div class="drawer__body">
+    <a class="drawer__item drawer__item--active" href="login.html">
+      <span>NetBank log on</span>
+      <svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg>
+    </a>
+    <a class="drawer__item" href="#commbiz">
+      <span>CommBiz log on</span>
+      <svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg>
+    </a>
+    <a class="drawer__item" href="#commsec">
+      <span>CommSec log on</span>
+      <svg class="ico ico--chev" aria-hidden="true"><use href="#i-chev"/></svg>
+    </a>
+
+    </div>
+  </div>
+</div>
+
+<noscript><style>.mega,.search,.cookies{display:block}</style></noscript>
+<script src="script.js" defer></script>
+</body>
+</html>

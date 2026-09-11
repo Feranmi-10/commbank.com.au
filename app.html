@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>NetBank — Home</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Signed-in app home screen built from a design spec. Fictional brand, demo data only.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='6' y='6' width='20' height='20' rx='3' fill='%23FFCD00' stroke='%23000' stroke-width='2' transform='rotate(45 16 16)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="login.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body class="app-body">
+
+<!-- ============================================================
+     SIGNED-IN APP HOME — built from design-app-home.md §1-§11
+     Measured off the reference: 16px gutter · 358 content · card
+     358x126 r8 · tiles 80x80 r12 · tab bar 47px + safe area.
+     Fictional brand, demo data, no network calls.
+     ============================================================ -->
+
+<svg class="sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+  <symbol id="a-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.4 15.4 21 21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="a-dots" viewBox="0 0 24 24"><g fill="currentColor"><circle cx="12" cy="5" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="12" cy="19" r="1.9"/></g></symbol>
+  <symbol id="a-chev" viewBox="0 0 24 24"><path d="M9 4.5 16.5 12 9 19.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="a-bill" viewBox="0 0 48 48"><rect x="10" y="9" width="28" height="30" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M17 18h14M17 25h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M28 30l5-9 3 6 4-4" fill="none" stroke="#FFD21E" stroke-width="2.4" stroke-linejoin="round"/><path d="M38 39V26l-6 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="a-bars" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="10" y="26" width="8" height="12"/><rect x="20" y="18" width="8" height="20"/><rect x="30" y="10" width="8" height="28"/></g><rect x="30" y="10" width="8" height="28" fill="#FFD21E" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="a-bag" viewBox="0 0 48 48"><path d="M12 17h24l-2 21H14z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M19 17v-3a5 5 0 0 1 10 0v3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 32h24v6H12z" fill="#FFD21E" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="a-cardless" viewBox="0 0 48 48"><path d="M14 12h22v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="18" y="14" width="20" height="22" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M24 22h8" stroke="#FFD21E" stroke-width="4" stroke-linecap="round"/><path d="M14 40V32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="a-gauge" viewBox="0 0 48 48"><path d="M9 32a15 15 0 1 1 30 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M24 32 32 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="32" r="3.4" fill="#FFD21E" stroke="currentColor" stroke-width="2"/><path d="M13 24h3M32 24h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="a-leaf" viewBox="0 0 48 48"><path d="M24 40V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M24 24c0-8 5-12 12-12 0 8-4 12-12 12z" fill="#FFD21E" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M24 30c0-6-4-9-9-9 0 6 3 9 9 9z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="a-wallet" viewBox="0 0 48 48"><rect x="9" y="14" width="30" height="20" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M26 24h13v6H26z" fill="#FFD21E" stroke="currentColor" stroke-width="2"/><path d="M9 20h30" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="a-grid" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="11" y="11" width="12" height="12" rx="2"/><rect x="25" y="11" width="12" height="12" rx="2"/><rect x="11" y="25" width="12" height="12" rx="2"/><rect x="25" y="25" width="12" height="12" rx="2"/></g><rect x="25" y="11" width="12" height="12" rx="2" fill="#FFD21E"/></symbol>
+  <symbol id="a-home" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="a-accounts" viewBox="0 0 24 24"><path d="M4 8h16M4 15h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="a-pay" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 8v8M9.5 10.5h5M9.5 13.5h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="a-cards" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="a-gift" viewBox="0 0 24 24"><path d="M4 10h16v10H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 10v10M4 10h16" stroke="currentColor" stroke-width="2"/><path d="M12 10S9 4 6.5 6 12 10 12 10s3-6 5.5-4S12 10 12 10z" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+  <symbol id="a-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.9"/></symbol>
+  <symbol id="a-eye-off" viewBox="0 0 24 24"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M4 20 20 4" stroke="currentColor" stroke-width="1.9"/></symbol>
+</defs></svg>
+
+<a class="skip-link" href="#app-main">Skip to account summary</a>
+
+<!-- ---------- app shell ---------- -->
+<div class="app">
+
+  <aside class="app__rail" aria-label="Main sections">
+    <span class="app__rail-mark" aria-hidden="true"></span>
+    <nav class="rail">
+      <ul>
+        <li><a href="#app-main" aria-current="page"><svg class="ico" aria-hidden="true"><use href="#a-home"/></svg><span>Home</span></a></li>
+        <li><a href="#accounts"><svg class="ico" aria-hidden="true"><use href="#a-accounts"/></svg><span>Accounts</span></a></li>
+        <li><a href="#pay"><svg class="ico" aria-hidden="true"><use href="#a-pay"/></svg><span>Pay</span></a></li>
+        <li><a href="#cards"><svg class="ico" aria-hidden="true"><use href="#a-cards"/></svg><span>Cards</span></a></li>
+        <li><a href="#offers"><svg class="ico" aria-hidden="true"><use href="#a-gift"/></svg><span>Rewards</span></a></li>
+      </ul>
+    </nav>
+    <button class="rail__out" type="button" data-sign-out>Sign out</button>
+  </aside>
+
+  <main class="app__main" id="app-main">
+    <div class="app__scroll">
+    <div class="col col--a">
+            <header class="greet">
+              <h1 class="greet__name" id="greet-name" tabindex="-1">Hi there</h1>
+            </header>
+            <button class="searchbar" type="button" data-search>
+              <svg class="ico" aria-hidden="true"><use href="#a-search"/></svg>
+              <span data-search-hint>Search &ldquo;Statement&rdquo;</span>
+            </button>
+            <section class="card-acct" id="accounts" aria-labelledby="acct-name">
+              <div class="card-acct__top">
+                <h2 class="card-acct__name" id="acct-name">Smart Access</h2>
+                <button class="card-acct__eye" type="button" data-hide-bal aria-pressed="false">
+                  <svg class="ico" aria-hidden="true"><use href="#a-eye"/></svg><span>Hide balance</span>
+                </button>
+                <button class="card-acct__more" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Options for Smart Access">
+                  <svg class="ico" aria-hidden="true"><use href="#a-dots"/></svg>
+                </button>
+                <div class="menu" role="menu" aria-label="Smart Access options" hidden>
+                  <button role="menuitem" type="button" data-menu="Statement">View statement</button>
+                  <button role="menuitem" type="button" data-menu="Transfer">Transfer money</button>
+                  <button role="menuitem" type="button" data-menu="Details">Account details</button>
+                </div>
+              </div>
+              <div class="card-acct__fig">
+                <p class="card-acct__balance" role="status" data-balance><span class="skel" style="width:14ch">&nbsp;</span></p>
+                <p class="card-acct__sub">Balance <span data-compact>—</span></p>
+              </div>
+            </section>
+            <section class="qa" id="pay" aria-labelledby="qa-title">
+              <h2 class="visually-hidden" id="qa-title">Quick actions</h2>
+              <div class="qa__grid">
+                <button class="qa__item" type="button" data-action="Bills &amp; payments"><span class="qa__icon"><svg aria-hidden="true"><use href="#a-bill"/></svg></span><span class="qa__label">Bills &amp; payments</span></button>
+                <button class="qa__item" type="button" data-action="Cash flow"><span class="qa__icon"><svg aria-hidden="true"><use href="#a-bars"/></svg></span><span class="qa__label">Cash flow</span></button>
+                <button class="qa__item" type="button" data-action="Offers"><span class="qa__icon"><svg aria-hidden="true"><use href="#a-bag"/></svg></span><span class="qa__label">Offers</span></button>
+                <button class="qa__item" type="button" data-action="Cardless Cash"><span class="qa__icon"><svg aria-hidden="true"><use href="#a-cardless"/></svg></span><span class="qa__label">Cardless Cash</span></button>
+                <button class="qa__item" type="button" data-action="Credit score"><span class="qa__icon"><svg aria-hidden="true"><use href="#a-gauge"/></svg></span><span class="qa__label">Credit score</span></button>
+                <button class="qa__item" type="button" data-action="Money plan"><span class="qa__icon"><svg aria-hidden="true"><use href="#a-leaf"/></svg></span><span class="qa__label">Money plan</span></button>
+                <button class="qa__item qa__item--emph" type="button" data-action="Apply for a product"><span class="qa__icon"><svg aria-hidden="true"><use href="#a-wallet"/></svg></span><span class="qa__label">Apply for a product</span></button>
+                <button class="qa__item qa__item--emph" type="button" data-action="View all features"><span class="qa__icon"><svg aria-hidden="true"><use href="#a-grid"/></svg></span><span class="qa__label">View all features</span></button>
+              </div>
+            </section>
+      <div class="app__split" role="separator" aria-hidden="true"></div>
+
+            <section class="offers" id="offers" aria-labelledby="offers-title">
+              <h2 class="sect-title" id="offers-title">NetBank Rewards offers</h2>
+              <div class="carousel" data-carousel tabindex="0" role="group" aria-label="Offers, scroll horizontally">
+                <article class="offer"><span class="offer__chip">This month</span><h3>Up to 4% cashback on fuel and groceries</h3><p>Activate by 30 Sep to earn on purchases made in October.</p></article>
+                <article class="offer"><span class="offer__chip">Refinance</span><h3>$2,000 toward your first year of home loan repayments</h3><p>Eligibility applies. Offer ends 31 Oct 2026.</p></article>
+                <article class="offer"><span class="offer__chip">Saver</span><h3>Earn 1.25% bonus interest when you deposit and withdraw nothing</h3><p>Applies to accounts opened in the current quarter.</p></article>
+              </div>
+            </section>
+    </div>
+
+    <div class="col col--b">
+            <section class="bills" aria-labelledby="bills-title">
+              <h2 class="sect-title" id="bills-title">Due in the next 14 days</h2>
+              <ul class="list">
+                <li><a href="#bill-electric"><span class="list__mark">EL</span><span class="list__body"><span class="list__title">Electricity — Ausgrid</span><span class="list__meta">Due Fri 18 Sep</span></span><span class="list__amt">$142.60</span><svg class="ico list__chev" aria-hidden="true"><use href="#a-chev"/></svg></a></li>
+                <li><a href="#bill-internet"><span class="list__mark">NBN</span><span class="list__body"><span class="list__title">Internet — Superloop</span><span class="list__meta">Due Mon 21 Sep</span></span><span class="list__amt">$89.00</span><svg class="ico list__chev" aria-hidden="true"><use href="#a-chev"/></svg></a></li>
+                <li><a href="#bill-water"><span class="list__mark">WC</span><span class="list__body"><span class="list__title">Water — Sydney Water</span><span class="list__meta">Auto-pay on 24 Sep</span></span><span class="list__amt">–</span><svg class="ico list__chev" aria-hidden="true"><use href="#a-chev"/></svg></a></li>
+              </ul>
+            </section>
+            <section class="goals" id="cards" aria-labelledby="goals-title">
+              <h2 class="sect-title" id="goals-title">Goals</h2>
+              <div class="goals__grid">
+                <article class="goal">
+                  <span class="ring" style="--p:68" role="img" aria-label="68 percent saved"><span></span></span>
+                  <div><h3>Japan trip</h3><p class="goal__fig"><strong>$4,760</strong> of $7,000</p></div>
+                </article>
+                <article class="goal">
+                  <span class="ring" style="--p:24" role="img" aria-label="24 percent saved"><span></span></span>
+                  <div><h3>Emergency fund</h3><p class="goal__fig"><strong>$1,930</strong> of $8,000</p></div>
+                </article>
+              </div>
+            </section>
+            <section class="insight" aria-labelledby="insight-title">
+              <h2 class="visually-hidden" id="insight-title">This month</h2>
+              <p class="insight__text">You're <strong>12% under</strong> last month on food and dining.</p>
+              <a class="insight__link" href="#insights">See cash flow</a>
+            </section>
+            <section class="help" aria-labelledby="help-title">
+              <h2 class="visually-hidden" id="help-title">Help</h2>
+              <a class="help__row" href="#help"><span>Lost card, suspicious transaction or locked out?</span><svg class="ico" aria-hidden="true"><use href="#a-chev"/></svg></a>
+            </section>
+      </div><!-- /.col--b -->
+    </div><!-- /.app__scroll -->
+
+    <!-- 6 · tab bar (47px + safe area) -->
+    <nav class="tabbar" aria-label="Primary">
+      <ul>
+        <li><a href="#app-main" aria-current="page"><span class="tabbar__ico tabbar__ico--brand" aria-hidden="true"></span><span>Home</span></a></li>
+        <li><a href="#accounts"><span class="tabbar__ico" aria-hidden="true"><svg><use href="#a-accounts"/></svg></span><span>Accounts</span></a></li>
+        <li><a href="#pay"><span class="tabbar__ico" aria-hidden="true"><svg><use href="#a-pay"/></svg></span><span>Pay</span></a></li>
+        <li><a href="#cards"><span class="tabbar__ico" aria-hidden="true"><svg><use href="#a-cards"/></svg></span><span>Cards</span></a></li>
+        <li><a href="#offers"><span class="tabbar__ico" aria-hidden="true"><svg><use href="#a-gift"/></svg></span><span>Rewards</span></a></li>
+      </ul>
+    </nav>
+  </main>
+</div>
+
+<p class="visually-hidden" role="status" aria-live="polite" data-say></p>
+
+<script src="app.js" defer></script>
+</body>
+</html>

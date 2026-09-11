@@ -1,0 +1,204 @@
+/* ==========================================================================
+   Nimbus practice sign-in page — login.css
+   Layered on top of styles.css so the tokens (colours, type, focus ring) are
+   shared with the homepage clone. Everything here is scoped to .login-page
+   or an `l-` prefix so the two stylesheets can never fight over a class.
+
+   Layout grammar taken from the reference: left-aligned stack, oversized
+   heading, boxy inputs with an inline Show toggle, square checkbox,
+   pill button, sparse legal links, colour band at the foot.
+   ========================================================================== */
+
+:root {
+  /* this fictional brand's own palette — teal, not the reference's yellow */
+  --nimbus: #0f6f6c;
+  --nimbus-deep: #0a5250;
+  --nimbus-tint: #e9f4f3;
+  --nimbus-ink: #16211f;
+  --nimbus-field: #d5dbda;
+  --nimbus-error: #b3261e;
+}
+
+.login-page {
+  min-height: 100vh;
+  background: #fff;
+  color: var(--nimbus-ink);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- bar across the top: back, mark, brand, help ---------- */
+.lbar {
+  display: flex; align-items: center; gap: .6rem;
+  padding: .55rem clamp(.7rem, 3vw, 1.4rem);
+  border-bottom: 1px solid #eceeed;
+  position: sticky; top: 0; background: #fff; z-index: 5;
+}
+.lbar__back {
+  width: 40px; height: 40px; flex: none;
+  display: grid; place-items: center;
+  border-radius: 50%; color: var(--nimbus-ink); text-decoration: none;
+}
+.lbar__back:hover { background: #f1f3f2; }
+.lbar__back .ico { width: 20px; height: 20px; transform: rotate(180deg); }
+.lbar__mark {
+  width: 26px; height: 26px; flex: none; border-radius: 50%;
+  background: var(--nimbus); position: relative;
+}
+.lbar__mark::after {
+  content: ""; position: absolute; inset: 6px 5px auto 5px; height: 9px;
+  border: 2.4px solid #fff; border-top: 0; border-radius: 0 0 9px 9px;
+}
+.lbar__brand { font-weight: 700; letter-spacing: -.01em; margin-right: auto; }
+.lbar__help {
+  font: inherit; font-size: .9rem; font-weight: 700; color: var(--nimbus);
+  background: none; border: 0; cursor: pointer; padding: .5rem .35rem;
+  text-decoration: underline; text-underline-offset: 4px;
+}
+
+/* ---------- the single column ---------- */
+.lwrap { flex: 1 1 auto; width: 100%; padding: clamp(1.1rem, 4vw, 2rem) 20px 2.5rem; }
+.lpanel { width: 100%; max-width: 560px; margin-inline: auto; }
+
+.lpanel__title {
+  font-size: clamp(2.3rem, 9.5vw, 3.15rem);
+  font-weight: 700; line-height: 1.05; letter-spacing: -.03em;
+  margin: clamp(1.5rem, 6.4vw, 2.6rem) 0 clamp(1.35rem, 5.6vw, 2.6rem);
+}
+
+.lpanel__note {
+  font-size: .82rem; font-weight: 700; letter-spacing: .01em; color: var(--nimbus-deep);
+  margin: -1.2rem 0 1.7rem; padding-left: .6rem; border-left: 3px solid var(--nimbus);
+}
+
+/* ---------- fields ---------- */
+.lform { display: grid; gap: .9rem 0; }
+
+.lfield__label { display: block; font-size: .95rem; font-weight: 700; margin-bottom: .45rem; }
+.lfield__box {
+  display: flex; align-items: center;
+  border: 1.5px solid var(--nimbus-field); border-radius: 8px;
+  background: #fff; transition: border-color .16s var(--ease), box-shadow .16s var(--ease);
+}
+.lfield__box:focus-within { border-color: var(--nimbus); box-shadow: 0 0 0 3px rgba(15, 111, 108, .16); }
+/* measured off the reference: 41px ink box height, 350px wide at a 390px viewport */
+.lfield input[type="text"],
+.lfield input[type="password"] {
+  flex: 1 1 auto; min-width: 0;
+  font: inherit; font-size: 1rem; color: var(--nimbus-ink);
+  padding: .5rem .7rem; min-height: 38px; border: 0; background: none; border-radius: 8px;
+}
+.lfield input::placeholder { color: #616c68; }
+.lfield input:focus { outline: none; box-shadow: none; }
+.lfield__toggle {
+  flex: none; margin-right: .5rem; padding: .45rem .5rem;
+  font: inherit; font-size: .9rem; font-weight: 700; color: var(--nimbus-ink);
+  background: none; border: 0; cursor: pointer;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.lfield__toggle:hover { color: var(--nimbus); }
+.lfield__help { margin-top: .45rem; font-size: .82rem; color: #4c5a58; }
+.lfield__help code { font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; background: #f2f4f3; padding: .05em .35em; border-radius: 4px; }
+.lfield__hint { margin-top: .45rem; font-size: .82rem; font-weight: 700; color: var(--nimbus-deep); }
+
+/* error state — driven by JS, not native validation */
+.lfield.is-bad .lfield__box { border-color: var(--nimbus-error); box-shadow: 0 0 0 3px rgba(179, 38, 30, .12); }
+.lfield.is-bad .lfield__label { color: var(--nimbus-error); }
+.lfield__error { margin-top: .45rem; font-size: .85rem; font-weight: 700; color: var(--nimbus-error); }
+
+.lerro {
+  border: 1.5px solid var(--nimbus-error); border-radius: 8px;
+  background: #fdf1f0; color: #7c1a15; padding: .8rem .95rem; font-size: .9rem;
+}
+.lerro ul { margin: .4rem 0 0 1.1rem; list-style: disc; }
+.lerro a { color: #7c1a15; }
+
+/* ---------- remember me ---------- */
+.lcheck { display: grid; gap: .35rem; }
+.lcheck__label { display: flex; align-items: flex-start; gap: .7rem; font-size: .98rem; cursor: pointer; }
+.lcheck__label input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.lcheck__box {
+  width: 20px; height: 20px; flex: none; margin-top: -.1rem;
+  border: 1.5px solid var(--nimbus-ink); border-radius: 3px; background: #fff;
+  display: grid; place-items: center; transition: background-color .15s var(--ease), border-color .15s var(--ease);
+}
+.lcheck__box::after {
+  content: ""; width: 11px; height: 6px;
+  border: 2.4px solid #fff; border-top: 0; border-right: 0;
+  transform: rotate(-45deg) scale(.4); opacity: 0;
+  transition: transform .15s var(--ease), opacity .15s var(--ease);
+}
+.lcheck__label input:checked + .lcheck__box { background: var(--nimbus-ink); }
+.lcheck__label { font-size: .96rem; }
+.lcheck__label input:checked + .lcheck__box::after { transform: rotate(-45deg) scale(1); opacity: 1; }
+.lcheck__label input:focus-visible + .lcheck__box { box-shadow: var(--focus); }
+.lcheck__warn { font-size: .87rem; color: #4c5a58; padding-left: 2.05rem; }
+
+/* ---------- the button ---------- */
+/* reference pill measures 87x42 with radius = height/2 — a tight, content-sized button */
+.lbtn {
+  justify-self: start;
+  display: inline-flex; align-items: center; gap: .55rem;
+  min-width: 88px; min-height: 42px; padding: .55rem 1.25rem;
+  background: var(--nimbus-ink); color: #fff;
+  font: inherit; font-size: 1rem; font-weight: 700;
+  border: 0; border-radius: 999px; cursor: pointer;
+  transition: transform .14s var(--ease), background-color .16s var(--ease), opacity .16s var(--ease);
+}
+.lbtn:hover { background: #000; }
+.lbtn:active { transform: translateY(1px); }
+.lbtn__spin { width: 15px; height: 15px; border-radius: 50%; border: 2px solid rgba(255,255,255,.4); border-top-color: #fff; display: none; }
+.lbtn.is-busy { pointer-events: none; opacity: .85; }
+.lbtn.is-busy .lbtn__spin { display: block; animation: lspin .7s linear infinite; }
+@keyframes lspin { to { transform: rotate(360deg); } }
+
+/* ---------- below the form ---------- */
+.linfo { margin-top: clamp(1.8rem, 7vw, 2.6rem); display: grid; gap: 1.15rem; font-size: .97rem; }
+.linfo p { margin: 0; }
+.linfo a { color: var(--nimbus-ink); text-decoration: underline; text-underline-offset: 3px; }
+.linfo a:hover { color: var(--nimbus); }
+.linfo__link { font-weight: 700; }
+.linfo__support { color: #4c5a58; }
+
+/* ---------- foot band (the reference's colour strip) ---------- */
+.lfoot { margin-top: auto; }
+.lfoot__band {
+  height: 128px;
+  background:
+    linear-gradient(100deg, var(--nimbus) 0 34%, var(--nimbus-deep) 34% 47%, #0b4744 47% 100%);
+  position: relative; overflow: hidden;
+}
+.lfoot__band::after {
+  content: ""; position: absolute; inset: 0;
+  background: repeating-linear-gradient(115deg, rgba(255,255,255,.13) 0 2px, transparent 2px 46px);
+}
+.lfoot__caption {
+  padding: .9rem 20px 1.2rem;
+  font-size: .78rem; line-height: 1.5; color: #5a6765;
+}
+
+/* ---------- the help popover (aria-describedby / dialog-lite) ---------- */
+.lhelp {
+  position: fixed; inset: auto 0 0 0; z-index: 20;
+  padding-inline: 20px !important;
+  background: #fff; border-top: 1px solid var(--nimbus-field);
+  padding: 1.25rem clamp(1.1rem, 5vw, 1.6rem) 1.5rem;
+  transform: translateY(102%); transition: transform .28s var(--ease);
+  box-shadow: 0 -12px 30px rgba(0,0,0,.14);
+}
+.lhelp.is-open { transform: none; }
+.lhelp h2 { font-size: 1.15rem; margin-bottom: .5rem; }
+.lhelp p { font-size: .93rem; color: #4c5a58; }
+.lhelp ul { margin: .6rem 0 0 1.1rem; list-style: disc; font-size: .93rem; }
+.lhelp button { margin-top: 1rem; }
+
+/* ---------- wide screens: two columns, form left, reassurance right ---------- */
+@media (min-width: 900px) {
+  .lwrap { padding-top: clamp(2rem, 6vh, 4rem); }
+  .lpanel { max-width: 520px; }
+  .lpanel__title { font-size: 3.15rem; margin-top: 1.6rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lbtn.is-busy .lbtn__spin { animation: none; }
+  .lhelp, .lbtn, .lcheck__box::after { transition: none; }
+}

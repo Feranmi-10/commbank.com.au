@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Log on to NetBank </title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="A practice sign-in page for Nimbus, a fictional bank, built with semantic HTML, CSS and vanilla JS. Layout study — it collects nothing and is not a real bank.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='6' y='6' width='20' height='20' rx='3' fill='%23FFCD00' stroke='%23000' stroke-width='2' transform='rotate(45 16 16)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="login.css">
+</head>
+<body class="login-page">
+
+<svg class="sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M9 4.5 16.5 12 9 19.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.8 9.4 17.6 19.5 6.6" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<!-- ==========================================================================
+     Practice sign-in page for NIMBUS, a fictional bank invented for this build.
+
+     Deliberately NOT a copy of any real bank's sign-in screen, because a
+     faithful clone of a live bank's login page is a phishing kit regardless of
+     whether it works. Everything that makes this page hard to misuse:
+       · it is inert — no form action, no fetch/XHR, no submit handler that
+         sends anything anywhere. Validation is the only behaviour.
+       · the secret field has no name="" attribute, so even if someone bolted
+         an action onto this form the password could not be submitted.
+       · the brand, mark, colours and copy are fictional, and the page is
+         watermarked. Nobody could mistake it for a real institution's login.
+     The layout grammar, states and accessibility work are real practice though.
+     ========================================================================== -->
+
+<header class="lbar">
+  <a class="lbar__back" href="index.html">
+    <svg class="ico" aria-hidden="true"><use href="#i-chev"/></svg>
+    <span class="visually-hidden">Back</span>
+  </a>
+   <a class="brand" href="#" aria-label="CommBank home">
+      <span class="brand__mark" aria-hidden="true"></span>
+    </a>
+ <div class="header__inner">
+  <button class="lbar__help" type="button" data-help></button>
+</header>
+
+<main class="lwrap">
+  <div class="lpanel">
+    <h1 class="lpanel__title">Log on to NetBank</h1>
+
+    <!-- role=status + novalidate: errors are rendered by JS so they can be
+         announced and focused, which native validation cannot do consistently -->
+    <form class="lform" novalidate data-login-form>
+      <div class="lerro" role="alert" aria-live="assertive" data-error-summary hidden></div>
+
+      <div class="lfield" data-field="account">
+        <label class="lfield__label" for="account">Client number</label>
+        <div class="lfield__box">
+          <input id="account" name="account" type="text" inputmode="numeric"
+                 autocomplete="username" aria-describedby="account-help"
+                 placeholder="" maxlength="10" inputmode="numeric" value="">
+        </div>
+      </div>
+
+      <div class="lfield" data-field="secret">
+        <label class="lfield__label" for="secret">Password</label>
+        <div class="lfield__box">
+          <!-- no name attribute on purpose: see the note at the top of this file -->
+          <input id="secret" type="password" autocomplete="current-password"
+                 aria-describedby="secret-help caps-hint" placeholder="">
+          <button class="lfield__toggle" type="button" data-toggle-secret aria-pressed="false" aria-controls="secret" >
+            <span data-toggle-label>Show</span>
+          </button>
+        </div>
+        <p class="lfield__hint" id="caps-hint" hidden>Caps Lock is on.</p>
+      </div>
+    
+      <div class="lcheck">
+        <label class="lcheck__label">
+          <input type="checkbox" data-remember>
+          <span class="lcheck__box" aria-hidden="true"></span>
+          <span>Remember my client number</span>
+        </label>
+        <p class="lcheck__warn">Don’t select this if anyone else uses this device.</p>
+      </div>
+
+      <button class="lbtn" type="submit" data-submit>
+        <span class="lbtn__text">Log on</span>
+        <span class="lbtn__spin" aria-hidden="true"></span>
+      </button>
+    </form>
+
+    <section class="linfo">
+      <p class="linfo__terms">By logging on, you agree to the Nimbus <a href="#terms">Electronic Banking Terms and Conditions</a>.</p>
+      <p><a class="linfo__link" href="#help">Get help logging on</a></p>
+      <p class="linfo__support">Need financial support? <a href="#support">Find out how we can help</a></p>
+    </section>
+    <p id="error" style="color: red;"></p>
+  </div>
+
+</main>
+
+
+
+<script src="login.js" defer></script>
+</body>
+</html>
