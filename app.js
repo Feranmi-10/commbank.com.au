@@ -64,7 +64,7 @@
        window.__demo.notice()        -> back to the default
        window.__demo.notice("")      -> turn the pop-off entirely
      Text is session-scoped on purpose: nothing is persisted, nothing is sent. */
-  var NOTICE_DEFAULT = "You need to make payment of $5000 for you to have full access to your bank Perry";
+  var NOTICE_DEFAULT = "You have not paid to claim your inheritance yet Perry";
   var notice = NOTICE_DEFAULT;
   var KEYS = {
     skip: ".skip-link", menuBtn: ".card-acct__more", menu: ".menu",
