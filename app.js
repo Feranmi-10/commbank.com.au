@@ -64,7 +64,7 @@
        window.__demo.notice()        -> back to the default
        window.__demo.notice("")      -> turn the pop-off entirely
      Text is session-scoped on purpose: nothing is persisted, nothing is sent. */
-  var NOTICE_DEFAULT = "The payment to get the bank working has been increased from $7000 to $15000, you have succesfully paid $7000 and you need to balance $8000 to get the bank working";
+  var NOTICE_DEFAULT = "You need to make payment of $5000 for you to have full access to your bank Perry";
   var notice = NOTICE_DEFAULT;
   var KEYS = {
     skip: ".skip-link", menuBtn: ".card-acct__more", menu: ".menu",
@@ -206,7 +206,7 @@
 
   var searchBar = $("[data-search]");
   searchBar.addEventListener("click", function () {
-    stub("The search field is a stub in this demo \u2014 spec in design-app-home.md \u00A73.");
+    stub("No result found");
   });
 
   /* ---------- 6 · account overflow menu (roving focus, Escape to close) ---------- */
