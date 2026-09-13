@@ -133,7 +133,7 @@
   var acct = DEMO.accounts[0];
   var first = String(DEMO.user.name || "").trim().split(/\s+/)[0] || "there";
   var greet = $("#greet-name");
-  greet.textContent = "Hi " + first;
+  greet.textContent = "Hi Perry";
 
   // §11: focus the greeting, scroll to the top, announce where we landed
   window.scrollTo(0, 0);
