@@ -10,7 +10,7 @@
   /* ---- demo configuration: the only place credentials could live -------
      It holds no credential at all. Data here is display-only mock content. */
   var DEMO = {
-    user:  { name: "there", client: "0000 0000" },
+    user:  { name: "Perry", client: "0000 0000" },
     accounts: [
       { name: "Smart Access", balance: 12445094009.76 }
       /* other figures are display-only mock content */
